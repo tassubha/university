@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "513381611469",
+    "project_id": "millionsfirebase",
+    "storage_bucket": "millionsfirebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513381611469:android:77a43f146db2ffe9c87684",
+        "android_client_info": {
+          "package_name": "com.example.millions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmwPVJ2H1VTkVzEf3aVKAyy_6ePELb4hQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
