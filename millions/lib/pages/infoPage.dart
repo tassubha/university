@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:millions/components/textfield.dart';
 import 'package:millions/pages/homepage.dart';
 
+final TextEditingController incomeInput = TextEditingController();
+  double fundementalPercentage = 60.0;
+  double funPercentage = 30.0;
+  double futurePercentage = 10.0;
+
 class Infopage extends StatefulWidget {
   const Infopage({super.key});
   @override
@@ -20,10 +25,7 @@ class Infopage extends StatefulWidget {
 // }
 
 class _InfopageState extends State<Infopage> {
-  final TextEditingController incomeInput = TextEditingController();
-  double fundementalPercentage = 60.0;
-  double funPercentage = 30.0;
-  double futurePercentage = 10.0;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +36,13 @@ class _InfopageState extends State<Infopage> {
 
         appBar: AppBar(
           title: Text(
-            "Millions",
+            "m i l l i o n s",
             style: TextStyle(
               color: Colors.orangeAccent,
               fontFamily: 'Charm',
             ),
           ),
+          centerTitle: true,
           backgroundColor:  Colors.brown[800],          
         ),
 
@@ -96,7 +99,7 @@ class _InfopageState extends State<Infopage> {
                   max: 100,
                   divisions: 20,
                   value: fundementalPercentage,
-                  label: "Fundemental  ${fundementalPercentage.round().toString()} %",
+                  label: "Fundemental Expense ${fundementalPercentage.round().toString()} %",
                   onChanged: (double value) {
                     setState(() {
                       fundementalPercentage = value;
@@ -116,7 +119,7 @@ class _InfopageState extends State<Infopage> {
                   max: 100,
                   divisions: 20,
                   value: funPercentage,
-                  label: "Fundemental  ${funPercentage.round().toString()} %",
+                  label: "Fun Purpose ${funPercentage.round().toString()} %",
                   onChanged: (double value) {
                     setState(() {
                       funPercentage = value;
@@ -136,7 +139,7 @@ class _InfopageState extends State<Infopage> {
                   max: 100,
                   divisions: 20,
                   value: futurePercentage,
-                  label: "Fundemental  ${futurePercentage.round().toString()} %",
+                  label: "For Future  ${futurePercentage.round().toString()} %",
                   onChanged: (double value) {
                     setState(() {
                       futurePercentage = value;

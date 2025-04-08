@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:millions/components/button.dart';
@@ -7,19 +6,33 @@ import 'package:millions/components/textfield.dart';
 import 'package:millions/pages/getstartedpage.dart';
 import 'package:millions/pages/homepage.dart';
 import "package:millions/services/firestore.dart";
+import 'package:millions/services/auth_service.dart';
 
 class LogInPage extends StatelessWidget {
   //text controllers
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
   LogInPage ({super.key});
+
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[200],
+
+      appBar: AppBar(
+          title: Text(
+            "m i l l i o n s",
+            style: TextStyle(
+              color: Colors.orangeAccent,
+              fontFamily: 'Charm',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor:  Colors.brown[800],          
+      ),
+
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -37,7 +50,7 @@ class LogInPage extends StatelessWidget {
 
           // app name
           Text(
-            "M I L L I O N S", style: TextStyle(
+            "L O G I N", style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.brown[900],
@@ -56,18 +69,6 @@ class LogInPage extends StatelessWidget {
             controller: emailController,
           ),
 
-          // const SizedBox(height: 10) ,
-
-          // // username
-          // MyTextField(
-          //   hintText: "Username",
-          //   style: TextStyle(
-          //     color: Colors.brown[900],
-          //   ),
-          //   obscureText: false,
-          //   controller: usernameController,
-          // ),
-
           const SizedBox(height: 10) ,
           // password textfield
           MyTextField(
@@ -78,64 +79,39 @@ class LogInPage extends StatelessWidget {
             obscureText: true,
             controller: passwordController,
           ),
-
-         // const SizedBox(height: 10) ,
-
-          // // confirm password textfield
-          // MyTextField(
-          //   hintText: "Confirm Password",
-          //   style: TextStyle(
-          //     color: Colors.brown[900],
-          //   ),
-          //   obscureText: true,
-          //   controller: confirmPasswordController,
-          // ),
-
-          
-                const SizedBox(height: 20) ,
-
          
-
+          const SizedBox(height: 20) ,
           // next button
           Positioned(
             bottom: 20,
             right: 20,
             child: FloatingActionButton(
-              onPressed: () {
-                // validate inputs
-                // final email = emailController.text;
-                // final username = usernameController.text;
-                // final password = passwordController.text;
-                // final confirmPassword = confirmPasswordController.text;
-              
+              onPressed: () async {
+                final email = emailController.text.trim();
+                final password = passwordController.text;
 
-                // if (email.substring(email.length - 9, email.length) != "gmail.com") {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(content: Text('Please provide a valid google account')),
-                //   );
-                //   return;
-                // }
+                if (email.isEmpty || password.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please fill in all fields')),
+                  );
+                  return;
+                }
 
-                // if (email.isEmpty || username.isEmpty || password.isEmpty || confirmPassword.isEmpty){
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(content: Text('Please fill in all fields')),
-                //   );
-                //   return;
-                // }
-                // if (password != confirmPassword) {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(content: Text('Password do not match')),
-                //   );
-                //   return;
-                // }
+                final error = await _authService.login(email, password);
 
-                // firestoreDatabaseAddUser(username, email, password);
+                if (error != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error)),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                }
 
-                // navigate to GetStartedPage
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                              
+                              
               },
               backgroundColor: Colors.brown[800],
               child: const Icon(

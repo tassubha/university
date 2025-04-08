@@ -5,6 +5,7 @@ import 'package:millions/components/textfield.dart';
 import 'package:millions/pages/getstartedpage.dart';
 //import 'package:millions/services/auth.dart';
 import "package:millions/services/firestore.dart";
+import 'package:millions/services/auth_service.dart';
 
 class SignUpPage extends StatelessWidget {
   //text controllers
@@ -15,11 +16,25 @@ class SignUpPage extends StatelessWidget {
   SignUpPage ({super.key});
 
   //AuthService authservice =  AuthService();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[200],
+
+      appBar: AppBar(
+          title: Text(
+            "m i l l i o n s",
+            style: TextStyle(
+              color: Colors.orangeAccent,
+              fontFamily: 'Charm',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor:  Colors.brown[800],          
+      ),
+
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),
@@ -37,7 +52,7 @@ class SignUpPage extends StatelessWidget {
 
           // app name
           Text(
-            "M I L L I O N S", style: TextStyle(
+            "S I G N U P", style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.brown[900],
@@ -69,6 +84,7 @@ class SignUpPage extends StatelessWidget {
           ),
 
           const SizedBox(height: 10) ,
+
           // password textfield
           MyTextField(
             hintText: "Password",
@@ -92,16 +108,14 @@ class SignUpPage extends StatelessWidget {
           ),
 
           
-                const SizedBox(height: 20) ,
-
-         
+          const SizedBox(height: 20) ,
 
           // next button
           Positioned(
             bottom: 20,
             right: 20,
             child: FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 // validate inputs
                 final email = emailController.text;
                 final username = usernameController.text;
@@ -129,14 +143,25 @@ class SignUpPage extends StatelessWidget {
                   return;
                 }
 
-                firestoreDatabaseAddUser(username, email, password);
-                //authservice.signup(username, email, password);
+                final error = await _authService.signUp(username, email, password);
 
-                // navigate to GetStartedPage
-                Navigator.push(
+                if(error != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error)),
+                  );
+                } else {
+                  Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Getstartedpage()),
                 );
+
+                }
+
+                //firestoreDatabaseAddUser(username, email, password);
+                //authservice.signup(username, email, password);
+
+                // navigate to GetStartedPage
+                
               },
               backgroundColor: Colors.brown[800],
               child: const Icon(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:millions/pages/infoPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +13,8 @@ class _HomePageState extends State<HomePage> {
   final newExpenseNameController = TextEditingController();
   final newExpenseAmountController = TextEditingController();
 
+  int moneyLeft = int.parse(incomeInput.text);
+
   // add new expense
   void addNewExpense() {
     showDialog(
@@ -21,8 +24,12 @@ class _HomePageState extends State<HomePage> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(),
-            TextField(),
+            TextField(controller: newExpenseNameController,),
+            TextField(controller: newExpenseAmountController,),
+            Text(
+              'your current amount: $moneyLeft'
+              
+            )
           ],
         ),
         actions: [
@@ -45,12 +52,13 @@ class _HomePageState extends State<HomePage> {
 
   //save
   void save(){
-
+    moneyLeft -= int.parse(newExpenseAmountController.text);
+    print(moneyLeft);
   }
 
   //cancel
   void cancel(){
-    
+
   }
   
   

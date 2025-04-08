@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:millions/pages/homepage.dart';
 import 'package:millions/pages/infoPage.dart';
 import 'package:millions/pages/loginPage.dart';
 import 'package:millions/pages/signuppage.dart';
@@ -22,43 +23,62 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      darkTheme: darkMode,
+      
       home: Builder(
       builder: (context) => Scaffold(
-      //backgroundColor: Theme.of(context).colorScheme.surface,
       backgroundColor: Colors.orange[200],
+
+      appBar: AppBar(
+          title: Text(
+            "m i l l i o n s",
+            style: TextStyle(
+              color: Colors.orangeAccent[200],
+              fontFamily: 'Charm',
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor:  Colors.brown[800],          
+      ),
+
       body: Center(
        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         
         children: [
           Text(
-          'Welcome To The World Of Productivity',
+          'Welcome to the World of Productivity',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
-            color: Colors.brown,
+            color: Colors.brown[800],
           ),
         ),
+
+
          const SizedBox(height: 16),
+
+
          Text(
           'spend your money wisely with MILLLIONS from today',
           style: TextStyle(
             fontSize: 16,
-            color: const Color.fromARGB(255, 60, 49, 45)
+            color: Colors.brown[800],
           ),
          ),
+
+
          const SizedBox(height: 32),
+
+
          ElevatedButton(
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SignUpPage()),
+              MaterialPageRoute(builder: (context) => Infopage()),
             );
          }, 
          style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.brown,
+          backgroundColor: Colors.brown[800],
           foregroundColor: Colors.orangeAccent[200],
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
 
@@ -74,7 +94,7 @@ class MyApp extends StatelessWidget {
             );
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.brown,
+            backgroundColor: Colors.brown[800],
             foregroundColor: Colors.orangeAccent[200],
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
           ),
