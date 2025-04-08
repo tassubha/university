@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:millions/components/textfield.dart';
 import 'package:millions/pages/getstartedpage.dart';
 import 'package:millions/pages/homepage.dart';
+import 'package:millions/pages/main_homepage.dart';
 import "package:millions/services/firestore.dart";
 import 'package:millions/services/auth_service.dart';
 

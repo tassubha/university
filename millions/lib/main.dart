@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Infopage()),
+              MaterialPageRoute(builder: (context) => SignUpPage()),
             );
          }, 
          style: ElevatedButton.styleFrom(
@@ -85,7 +85,11 @@ class MyApp extends StatelessWidget {
          ),
          child: const Text('Sign Up'),
         ),
+
+
         const SizedBox(height: 16),
+
+
         ElevatedButton(
           onPressed:() {
             Navigator.push(
@@ -102,7 +106,7 @@ class MyApp extends StatelessWidget {
         ),
 
           
-            ],
+        ],
           ),
         ),     
       ),

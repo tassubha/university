@@ -156,8 +156,8 @@ class _InfopageState extends State<Infopage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.brown,
-                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.brown[800],
+                  foregroundColor: Colors.orangeAccent,
                   padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
                 child: const Text(
