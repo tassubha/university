@@ -24,7 +24,7 @@ class MyTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: style,
         border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
           
         ),
         filled: true,

@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:millions/components/button.dart';
 import 'package:millions/components/textfield.dart';
 import 'package:millions/pages/getstartedpage.dart';
+//import 'package:millions/services/auth.dart';
+import "package:millions/services/firestore.dart";
 
 class SignUpPage extends StatelessWidget {
   //text controllers
@@ -11,6 +13,8 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
   SignUpPage ({super.key});
+
+  //AuthService authservice =  AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -103,20 +107,30 @@ class SignUpPage extends StatelessWidget {
                 final username = usernameController.text;
                 final password = passwordController.text;
                 final confirmPassword = confirmPasswordController.text;
+              
 
-                if(email.isEmpty || username.isEmpty || password.isEmpty || confirmPassword.isEmpty){
+                if (email.substring(email.length - 9, email.length) != "gmail.com") {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please provide a valid google account')),
+                  );
+                  return;
+                }
+
+                if (email.isEmpty || username.isEmpty || password.isEmpty || confirmPassword.isEmpty){
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please fill in all fields')),
                   );
                   return;
                 }
-                if(password != confirmPassword) {
+                if (password != confirmPassword) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Password do not match')),
                   );
                   return;
                 }
 
+                firestoreDatabaseAddUser(username, email, password);
+                //authservice.signup(username, email, password);
 
                 // navigate to GetStartedPage
                 Navigator.push(

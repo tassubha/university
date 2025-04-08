@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:millions/pages/infoPage.dart';
 import 'package:millions/pages/loginPage.dart';
 import 'package:millions/pages/signuppage.dart';
 import 'package:millions/theme/dark_mode.dart';
@@ -12,7 +13,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
 );
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +22,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: lightMode,
+      theme: ThemeData(),
       darkTheme: darkMode,
-    home: Builder(
-      builder: (context) =>
-      Scaffold(
+      home: Builder(
+      builder: (context) => Scaffold(
       //backgroundColor: Theme.of(context).colorScheme.surface,
       backgroundColor: Colors.orange[200],
       body: Center(
@@ -34,8 +33,8 @@ class MyApp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         
         children: [
-           Text(
-          'WELCOME TO THE WORLD OF PRODUCTIVITY',
+          Text(
+          'Welcome To The World Of Productivity',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
